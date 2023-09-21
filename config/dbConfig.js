@@ -2,7 +2,7 @@ module.exports = {
     HOST: "localhost",
     USER: "root",
     PASSWORD: "",
-    DB: "sepcms",
+    DB: "todolist",
     dialect: "mysql",
     pool: {
         max: 5,

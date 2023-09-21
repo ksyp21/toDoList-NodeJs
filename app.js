@@ -13,6 +13,10 @@ app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
 
 
+app.get("/", (req, res) => {
+    res.render("list")
+})
+
 app.listen(3000, () => {
     console.log("NodeJs project has started at port 3000")
 })
