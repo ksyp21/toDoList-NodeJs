@@ -1,6 +1,7 @@
 const express = require('express')
 const { QueryTypes } = require('sequelize')
 const { lists, sequelize } = require('./model/index')
+const { renderList, addTask, allList, deleteList } = require('./controller/listController')
 
 const app = express()
 

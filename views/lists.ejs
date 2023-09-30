@@ -109,52 +109,51 @@
                 margin-left: 5px;
             }
         }
+
+        h3 {
+            text-align: center;
+        }
     </style>
 </head>
 
 <body>
     <div class="container">
         <h1>To-Do List</h1>
-        <div class="add-task">
-            <input type="text" id="taskInput" placeholder="Add a new task">
-            <button onclick="addTask()">Add</button>
-        </div>
-        <ul id="taskList">
-            <!-- Tasks will be added here -->
-        </ul>
+        <form action="/addTask" method="POST"> <!-- Specify the action and method -->
+            <div class="add-task">
+                <input type="text" name="task" id="taskInput" placeholder="Add a new task">
+                <button type="submit">Add</button> <!-- Use type="submit" to submit the form -->
+            </div>
+            <% if (lists.length==0) { %>
+                <h3>Add tasks</h3>
+                <% } else { %>
+                    <div>
+                        <ul id="taskList">
+                            <!-- Tasks will be added here -->
+                            <% lists.forEach((list)=> { %>
+                                <li>
+                                    <h2><%- list.task %></h2>
+                                    <!-- <button class="edit">Edit</button> -->
+
+                                    <button type="button"><a href="/delete/<%-list.id %>">Delete</a></button>
+
+                                </li>
+                                <% }) %>
+
+                        </ul>
+                    </div>
+                    <% } %>
+
+        </form>
+
     </div>
 
-    <script>
-        function addTask() {
-            const taskInput = document.getElementById("taskInput");
-            const taskText = taskInput.value.trim();
-            if (taskText !== "") {
-                const taskList = document.getElementById("taskList");
-                const li = document.createElement("li");
-                li.innerHTML = `
-          <span>${taskText}</span>
-          <button class="edit" onclick="editTask(this)">Edit</button>
-          <button onclick="deleteTask(this)">Delete</button>
-        `;
-                taskList.appendChild(li);
-                taskInput.value = "";
-            }
-        }
 
-        function deleteTask(button) {
-            const taskList = document.getElementById("taskList");
-            const li = button.parentNode;
-            taskList.removeChild(li);
-        }
 
-        function editTask(button) {
-            const span = button.previousElementSibling;
-            const newText = prompt("Edit task:", span.textContent);
-            if (newText !== null) {
-                span.textContent = newText;
-            }
-        }
-    </script>
+
+
+
+
 </body>
 
 </html>
